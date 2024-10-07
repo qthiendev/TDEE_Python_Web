@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TDEE</title>
+    <link rel="stylesheet"  type="text/css" href="{% static 'css/tdee.css' %}" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Trang Chủ</a></li>
+                    <li><a href="/bmi">Tính BMI</a></li>
+                    <li><a href="/tdee">Tính TDEE</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="intro">
+            <div class="container">
+                <h1>TDEE Calculator</h1>
+                <form method="post" class="tdee-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="btn calculate-btn">Calculate</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Trịnh Quý Thiện, Trần Viết Thịnh, Đinh Đức Dũng | Giúp bạn đạt được mục tiêu sức khỏe của mình.</p>
+        </div>
+    </footer>
+</body>
+</html>

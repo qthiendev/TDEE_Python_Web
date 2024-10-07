@@ -1,0 +1,86 @@
+html, body {
+    height: 100%; /* Set height to 100% for html and body */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Use flexbox for body */
+    flex-direction: column; /* Stack children vertically */
+}
+
+.container {
+    max-width: 1200px; /* Container max width */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Container padding */
+    flex: 1; /* Allow container to grow */
+}
+
+header {
+    background-color: #f8f9fa; /* Background color for header */
+    padding: 10px 0; /* Reduce padding for header */
+}
+
+.nav-links {
+    list-style-type: none; /* Remove bullet points from list */
+    display: flex; /* Use flexbox for horizontal alignment */
+    justify-content: center; /* Center the nav items */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.nav-links li {
+    margin: 0 15px; /* Space between nav items */
+}
+
+.nav-links a {
+    text-decoration: none; /* Remove underline from links */
+    color: #007bff; /* Color for links */
+    font-size: 20px; /* Increase font size for links */
+    font-weight: bold; /* Make text bold */
+}
+
+.info-container {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out the boxes */
+    margin-top: 20px; /* Add margin to top */
+}
+
+.bmi-info, .tdee-info {
+    flex: 1; /* Make each box take equal space */
+    display: flex; /* Use flexbox for inner layout */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Space out content evenly */
+    padding: 20px; /* Inner padding for the boxes */
+    border: 2px solid #ccc; /* Border around the boxes */
+    border-radius: 10px; /* Rounded corners */
+    margin-right: 10px; /* Space between boxes */
+    background-color: #f9f9f9; /* Background color */
+}
+
+.bmi-info:last-child, .tdee-info:last-child {
+    margin-right: 0; /* Remove margin for last item */
+}
+
+h3 {
+    margin-top: 0; /* Remove top margin from headings */
+}
+
+.btn {
+    display: inline-block; /* Make the button inline block */
+    padding: 10px 20px; /* Padding for the button */
+    background-color: #28a745; /* Green background */
+    color: white; /* White text color */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+footer {
+    padding: 10px; /* Padding for footer */
+    text-align: center; /* Center the footer text */
+    margin-top: auto; /* Push footer to the bottom of the page */
+}
