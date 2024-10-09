@@ -1,102 +1,111 @@
-/* General Styles */
+/* Ensure the body takes the full height of the viewport */
 html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text color */
+    height: 100%; /* Full height */
+    margin: 0; /* Remove default margin */
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    flex: 1;
+/* Flexbox container for the entire page */
+.wrapper {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Arrange items vertically */
+    min-height: 100vh; /* Ensure it takes full height of viewport */
 }
 
-/* Header Styles */
-header {
-    background-color: #007bff;
+/* Main content should grow to fill available space */
+main {
+    flex: 1; /* Allow main to grow */
+}
+
+/* Existing footer styles */
+footer {
+    background-color: #4CAF50; /* Same green background */
+    color: white;
+    text-align: center;
     padding: 10px 0;
 }
 
-.nav-links {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
+/* Container styles */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+/* Header and nav styles */
+header {
+    background-color: #4CAF50; /* Header background color */
+    padding: 10px 0; /* Padding */
+    color: white; /* Text color */
+}
+
+/* Header styles */
+header {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 15px 0;
+}
+
+/* Updated nav styles */
+nav {
+    text-align: center; /* Center the navigation items */
 }
 
 .nav-links li {
-    margin: 0 15px;
+    display: inline-block; /* Ensure each item behaves as a block */
+    margin-right: 20px;
 }
 
 .nav-links a {
-    text-decoration: none;
     color: white;
-    font-size: 18px;
-    font-weight: bold;
-    transition: color 0.3s;
+    text-decoration: none;
+    font-weight: bold; /* Make text bold */
+    font-size: 18px; /* Increase font size */
+    padding: 10px 15px; /* Add padding around the text */
+    transition: color 0.3s; /* Smooth transition for hover effect */
 }
 
 .nav-links a:hover {
-    color: #ffd700; /* Gold color on hover */
+    color: #d0f0c0; /* Light green on hover */
 }
 
-/* Main Content Styles */
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+.nav-links {
+    list-style: none;
+    padding: 0;
 }
 
+/* Button styles */
 .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    width: auto;
-    margin-top: 20px;
-    transition: background-color 0.3s;
+    background-color: #4CAF50; /* Button background color */
+    color: white; /* Button text color */
+    padding: 10px 20px; /* Padding */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
 }
 
 .btn:hover {
-    background-color: #218838;
+    background-color: #45a049; /* Darker shade on hover */
 }
 
-/* Recommendations Styles */
-.recommendations {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+/* Recommendation styles */
 .recommendation-item {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    margin: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 90%; /* Responsive */
+    margin: 20px 0; /* Margin for spacing */
+    padding: 15px; /* Padding */
+    border: 1px solid #ccc; /* Border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background */
 }
 
-.category-image {
-    max-width: 100px; /* Size for images */
-    margin-bottom: 10px;
-}
-
-/* Footer Styles */
-footer {
-    padding: 10px;
-    text-align: center;
-    background-color: #007bff;
-    color: white;
-    margin-top: 20px;
+form {
+    margin: 20px 0; /* Margin for spacing */
+    width: 300px;
+    padding: 15px; /* Padding */
+    border: 1px solid #ccc; /* Border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background */
 }

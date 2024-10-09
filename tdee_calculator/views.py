@@ -57,7 +57,7 @@ def calculate_tdee(request):
 
             # Fetch meals and filter
             meals = Meal.objects.filter(calories__lte=tdee)
-            balanced_meals = filter_balanced_meals(meals, daily_protein, daily_carbs, daily_fats)
+            balanced_meals = filter_balanced_meals(meals, daily_protein, daily_carbs, daily_fats, tdee)
 
             # Check if balanced_meals is empty
             if not balanced_meals:
@@ -69,10 +69,10 @@ def calculate_tdee(request):
 
     return render(request, 'tdee.html', {'form': form})
 
-def filter_balanced_meals(meals, daily_protein, daily_carbs, daily_fats):
-    """Filter meals to ensure they meet daily nutritional balance criteria."""
+def filter_balanced_meals(meals, daily_protein, daily_carbs, daily_fats, tdee):
+    """Filter meals to ensure they meet daily nutritional balance criteria and stay within calorie limits."""
     balanced_meals = []
-    
+
     # Initialize total intake trackers
     total_protein = 0
     total_carbs = 0
@@ -89,10 +89,11 @@ def filter_balanced_meals(meals, daily_protein, daily_carbs, daily_fats):
         fats = meal.fats
         calories = meal.calories
 
-        # Check if adding this meal would exceed the daily nutritional goals
+        # Check if adding this meal would exceed daily nutritional goals and total calories
         if (total_protein + protein <= daily_protein and
             total_carbs + carbs <= daily_carbs and
-            total_fats + fats <= daily_fats):
+            total_fats + fats <= daily_fats and
+            total_calories + calories <= tdee):  # Check against tdee
             # Add meal to balanced meals
             balanced_meals.append(meal)
 
@@ -103,12 +104,13 @@ def filter_balanced_meals(meals, daily_protein, daily_carbs, daily_fats):
             total_calories += calories
 
             # Print meal details for debugging
-            print(f"Added: {meal.name} - Total Calories: {calories}, Protein: {protein}g, Carbs: {carbs}g, Fats: {fats}g")
+            print(f"Added: {meal.name} - Total Calories: {total_calories}, Protein: {total_protein}g, Carbs: {total_carbs}g, Fats: {total_fats}g")
 
         # Break if we've met or exceeded all daily goals
         if (total_protein >= daily_protein and
             total_carbs >= daily_carbs and
-            total_fats <= daily_fats):
+            total_fats >= daily_fats and
+            total_calories <= tdee):  # Ensure total calories is also checked
             break
 
     return balanced_meals

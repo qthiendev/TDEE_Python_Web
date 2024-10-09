@@ -1,86 +1,117 @@
+/* Ensure the body takes the full height of the viewport */
 html, body {
-    height: 100%; /* Set height to 100% for html and body */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text color */
+    height: 100%; /* Full height */
     margin: 0; /* Remove default margin */
-    display: flex; /* Use flexbox for body */
-    flex-direction: column; /* Stack children vertically */
+}
+
+/* Flexbox container for the entire page */
+.wrapper {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Arrange items vertically */
+    min-height: 100vh; /* Ensure it takes full height of viewport */
+}
+
+/* Main content should grow to fill available space */
+main {
+    flex: 1; /* Allow main to grow */
+}
+
+/* Existing footer styles */
+footer {
+    background-color: #4CAF50; /* Same green background */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
 }
 
 .container {
-    max-width: 1200px; /* Container max width */
-    margin: 0 auto; /* Center the container */
-    padding: 20px; /* Container padding */
-    flex: 1; /* Allow container to grow */
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
 }
 
+/* Header styles */
 header {
-    background-color: #f8f9fa; /* Background color for header */
-    padding: 10px 0; /* Reduce padding for header */
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 15px 0;
 }
-
-.nav-links {
-    list-style-type: none; /* Remove bullet points from list */
-    display: flex; /* Use flexbox for horizontal alignment */
-    justify-content: center; /* Center the nav items */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
+/* Updated nav styles */
+nav {
+    text-align: center; /* Center the navigation items */
 }
 
 .nav-links li {
-    margin: 0 15px; /* Space between nav items */
+    display: inline-block; /* Ensure each item behaves as a block */
+    margin-right: 20px;
 }
 
 .nav-links a {
-    text-decoration: none; /* Remove underline from links */
-    color: #007bff; /* Color for links */
-    font-size: 20px; /* Increase font size for links */
+    color: white;
+    text-decoration: none;
     font-weight: bold; /* Make text bold */
+    font-size: 18px; /* Increase font size */
+    padding: 10px 15px; /* Add padding around the text */
+    transition: color 0.3s; /* Smooth transition for hover effect */
 }
 
+.nav-links a:hover {
+    color: #d0f0c0; /* Light green on hover */
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+/* Intro section styles */
+.intro {
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Ensure the info-container uses Flexbox */
 .info-container {
-    display: flex; /* Use flexbox for layout */
-    justify-content: space-between; /* Space out the boxes */
-    margin-top: 20px; /* Add margin to top */
+    display: flex;
+    justify-content: space-between; /* Space between the items */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+    margin-top: 20px;
 }
 
+/* Individual info box styles */
 .bmi-info, .tdee-info {
-    flex: 1; /* Make each box take equal space */
-    display: flex; /* Use flexbox for inner layout */
-    flex-direction: column; /* Stack children vertically */
-    justify-content: space-between; /* Space out content evenly */
-    padding: 20px; /* Inner padding for the boxes */
-    border: 2px solid #ccc; /* Border around the boxes */
-    border-radius: 10px; /* Rounded corners */
-    margin-right: 10px; /* Space between boxes */
-    background-color: #f9f9f9; /* Background color */
+    background-color: #ffffff; /* White background for info boxes */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px;
+    flex: 1; /* Allow boxes to grow equally */
+    min-width: 300px; /* Minimum width for responsive behavior */
+    max-width: 45%; /* Maximum width to ensure they fit on the same line */
+    margin: 10px; /* Margin for spacing */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-.bmi-info:last-child, .tdee-info:last-child {
-    margin-right: 0; /* Remove margin for last item */
+
+.bmi-info h3, .tdee-info h3 {
+    color: #4CAF50; /* Green color for headings */
 }
 
-h3 {
-    margin-top: 0; /* Remove top margin from headings */
-}
-
+/* Button styles */
 .btn {
-    display: inline-block; /* Make the button inline block */
-    padding: 10px 20px; /* Padding for the button */
-    background-color: #28a745; /* Green background */
-    color: white; /* White text color */
-    text-align: center; /* Center the text */
-    text-decoration: none; /* Remove underline */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    width: 100%; /* Full width */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    display: inline-block;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px; /* Rounded button corners */
+    transition: background-color 0.3s; /* Smooth transition */
 }
 
 .btn:hover {
-    background-color: #218838; /* Darker green on hover */
-}
-
-footer {
-    padding: 10px; /* Padding for footer */
-    text-align: center; /* Center the footer text */
-    margin-top: auto; /* Push footer to the bottom of the page */
+    background-color: #45a049; /* Darker green on hover */
 }

@@ -1,10 +1,64 @@
 html, body {
-    height: 100%; /* Set height to 100% for html and body */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text color */
+    height: 100%; /* Full height */
     margin: 0; /* Remove default margin */
-    display: flex; /* Use flexbox for body */
-    flex-direction: column; /* Stack children vertically */
-    font-family: Arial, sans-serif; /* Font for the body */
-    background-color: #f5f5f5; /* Light background color */
+}
+
+footer {
+    background-color: #4CAF50; /* Same green background */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+eader {
+    background-color: #4CAF50; /* Header background color */
+    padding: 10px 0; /* Padding */
+    color: white; /* Text color */
+}
+
+/* Header styles */
+header {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 15px 0;
+}
+
+/* Updated nav styles */
+nav {
+    text-align: center; /* Center the navigation items */
+}
+
+.nav-links li {
+    display: inline-block; /* Ensure each item behaves as a block */
+    margin-right: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold; /* Make text bold */
+    font-size: 18px; /* Increase font size */
+    padding: 10px 15px; /* Add padding around the text */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.nav-links a:hover {
+    color: #d0f0c0; /* Light green on hover */
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Arrange items vertically */
+    min-height: 100vh; /* Ensure it takes full height of viewport */
 }
 
 .container {
@@ -97,11 +151,4 @@ header {
 
 .back-btn:hover {
     background-color: #218838; /* Darker green on hover */
-}
-
-footer {
-    padding: 10px; /* Padding for footer */
-    text-align: center; /* Center the footer text */
-    background-color: #f8f9fa; /* Background color for footer */
-    margin-top: 20px; /* Space above footer */
 }

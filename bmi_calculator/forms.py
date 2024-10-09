@@ -1,5 +1,5 @@
 from django import forms
 
 class BMIForm(forms.Form):
-    weight = forms.FloatField(label='Weight (kg)', min_value=1)
-    height = forms.FloatField(label='Height (cm)', min_value=1)
+    height = forms.FloatField(label='Chiều cao (cm)', min_value=1)
+    weight = forms.FloatField(label='Cân nặng (kg)', min_value=1)

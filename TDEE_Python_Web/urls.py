@@ -24,10 +24,11 @@ from bmi_calculator import views as bmi_calculator
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home.get_home),
-    path('tdee', tdee_calculator.calculate_tdee),
-    path('bmi', bmi_calculator.calculate_bmi),
+    path('', home.get_home, name='home'),  # Named URL for better referencing
+    path('tdee', tdee_calculator.calculate_tdee, name='calculate_tdee'),  # Added name for URL
+    path('bmi', bmi_calculator.calculate_bmi, name='calculate_bmi'),  # Added name for URL
 ]
 
 if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

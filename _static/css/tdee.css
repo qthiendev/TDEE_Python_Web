@@ -1,49 +1,139 @@
-.tdee-form {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    max-width: 400px;
+html, body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text color */
+    height: 100%; /* Full height */
+    margin: 0; /* Remove default margin */
 }
 
-.form-group {
-    display: flex; /* Use flexbox for aligning label and input */
-    align-items: center; /* Align vertically */
-    margin-bottom: 15px;
+/* Flexbox container for the entire page */
+.wrapper {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Arrange items vertically */
+    min-height: 100vh; /* Ensure it takes full height of viewport */
 }
 
-.form-group label {
-    flex: 0 0 150px; /* Fixed width for labels */
-    margin-right: 10px; /* Space between label and input */
-    font-weight: bold;
+/* Main content should grow to fill available space */
+main {
+    flex: 1; /* Allow main to grow */
 }
 
-.form-group input, .form-group select {
-    flex: 1; /* Let inputs fill remaining space */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box; /* Ensure padding is included in the width */
-}
-
-.calculate-btn {
-    display: block;
-    padding: 12px 16px;
-    background-color: #28a745;
+/* Existing footer styles */
+footer {
+    background-color: #4CAF50; /* Same green background */
     color: white;
     text-align: center;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
+    padding: 10px 0;
 }
 
-.calculate-btn:hover {
-    background-color: #218838;
+/* Container styles */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+/* Header and nav styles */
+header {
+    background-color: #4CAF50; /* Header background color */
+    padding: 10px 0; /* Padding */
+    color: white; /* Text color */
+}
+
+/* Header styles */
+header {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 15px 0;
+}
+
+/* Updated nav styles */
+nav {
+    text-align: center; /* Center the navigation items */
+}
+
+.nav-links li {
+    display: inline-block; /* Ensure each item behaves as a block */
+    margin-right: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold; /* Make text bold */
+    font-size: 18px; /* Increase font size */
+    padding: 10px 15px; /* Add padding around the text */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.nav-links a:hover {
+    color: #d0f0c0; /* Light green on hover */
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+/* Main Section for TDEE */
+.intro {
+    text-align: center; /* Center the text in intro */
+    margin: 20px 0;
+}
+
+h1 {
+    font-size: 2.5rem; /* Large title size */
+    color: #333; /* Dark text for the title */
+    margin-bottom: 20px; /* Space below the title */
+}
+
+/* Form styling */
+form.tdee-form {
+    background-color: #ffffff; /* White background for the form */
+    padding: 20px; /* Padding around form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 600px; /* Updated form width */
+    margin: 20px auto; /* Center form with margin */
+}
+
+/* Form elements */
+.form-group {
+    margin-bottom: 15px; /* Space between form elements */
+}
+
+label {
+    display: block; /* Make labels block elements */
+    font-weight: bold; /* Bold labels */
+    margin-bottom: 5px; /* Space below labels */
+}
+
+input, select {
+    width: 100%; /* Full width for inputs */
+    padding: 10px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded input corners */
+    box-sizing: border-box; /* Include padding in width */
+    margin-bottom: 10px; /* Space below inputs */
+}
+
+/* Button Styling */
+.btn {
+    display: inline-block; /* Inline block for button */
+    padding: 10px 20px; /* Button padding */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text color */
+    text-align: center; /* Center text in button */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded button corners */
+    width: 100%; /* Full width for button */
+    cursor: pointer; /* Show pointer cursor */
+    font-size: 1rem; /* Font size */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.btn:hover {
+    background-color: #45a049; /* Darker green on hover */
 }
