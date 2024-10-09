@@ -1,79 +1,87 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="vi">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kết Quả TDEE</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/results.css' %}" />
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="/">Trang Chủ</a></li>
-                    <li><a href="/bmi">Tính BMI</a></li>
-                    <li><a href="/tdee">Tính TDEE</a></li>
-                </ul>
-            </nav>
-        </div>
+      <div class="container">
+        <nav>
+          <ul class="nav-links">
+            <li>
+              <a href="/">Trang Chủ</a>
+            </li>
+            <li>
+              <a href="/bmi">Tính BMI</a>
+            </li>
+            <li>
+              <a href="/tdee">Tính TDEE</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main>
-        <div class="container">
-            <h1 class="tdee-title">TDEE của bạn là: <span>{{ tdee }}</span> kcal</h1>
-            <h2>Khuyến Nghị Bữa Ăn:</h2>
-            <div class="meal-list">
-                {% for meal in meals %}
-                    <div class="meal-item">
-                        <h3>{{ meal.name }} - <span>{{ meal.calories }}</span> kcal</h3>
-                        {% if meal.image %}
-                            <img src="{{ meal.image.url }}" alt="{{ meal.name }}" class="meal-image" />
-                        {% else %}
-                            <p class="no-image">Không có hình ảnh</p>
-                        {% endif %}
-                        <div class="meal-info">
-                            <div>
-                                <strong>Đạm:</strong> {{ meal.protein }}g
-                            </div>
-                            <div>
-                                <strong>Carbohydrate:</strong> {{ meal.carbs }}g
-                            </div>
-                            <div>
-                                <strong>Chất béo:</strong> {{ meal.fats }}g
-                            </div>
-                            <div>
-                                <strong>Chất xơ:</strong> {{ meal.fiber }}g
-                            </div>
-                            <div>
-                                <strong>Đường:</strong> {{ meal.sugar }}g
-                            </div>
-                            <div>
-                                <strong>Natri:</strong> {{ meal.sodium }}mg
-                            </div>
-                        </div>
-                        {% if meal.vitamins %}
-                            <p>
-                                <strong>Vitamin:</strong> {{ meal.vitamins }}
-                            </p>
-                        {% endif %}
-                        {% if meal.minerals %}
-                            <p>
-                                <strong>Khoáng chất:</strong> {{ meal.minerals }}
-                            </p>
-                        {% endif %}
-                    </div>
-                {% endfor %}
+      <div class="container">
+        <h1 class="tdee-title">TDEE của bạn là: <span>{{ tdee }}</span> kcal</h1>
+        <h2>Khuyến Nghị Bữa Ăn:</h2>
+        <div class="meal-list">
+          {% for meal in meals %}
+            <div class="meal-item">
+              <h3>{{ meal.name }} - <span>{{ meal.calories }}</span> kcal</h3>
+              {% if meal.image %}
+                <img src="{{ meal.image.url }}" alt="{{ meal.name }}" class="meal-image" />
+              {% else %}
+                <p class="no-image">Không có hình ảnh</p>
+              {% endif %}
+              <div class="meal-info">
+                <div>
+                  <strong>Đạm:</strong> {{ meal.protein }}g
+                </div>
+                <div>
+                  <strong>Carbohydrate:</strong> {{ meal.carbs }}g
+                </div>
+                <div>
+                  <strong>Chất béo:</strong> {{ meal.fats }}g
+                </div>
+                <div>
+                  <strong>Chất xơ:</strong> {{ meal.fiber }}g
+                </div>
+                <div>
+                  <strong>Đường:</strong> {{ meal.sugar }}g
+                </div>
+                <div>
+                  <strong>Natri:</strong> {{ meal.sodium }}mg
+                </div>
+              </div>
+              {% if meal.vitamins %}
+                <p>
+                  <strong>Vitamin:</strong> {{ meal.vitamins }}
+                </p>
+              {% endif %}
+              {% if meal.minerals %}
+                <p>
+                  <strong>Khoáng chất:</strong> {{ meal.minerals }}
+                </p>
+              {% endif %}
             </div>
-            <a href="/tdee" class="btn back-btn">Quay lại</a>
+          {% empty %}
+            <p>Không có bữa ăn nào phù hợp với tiêu chí của bạn.</p>
+          {% endfor %}
         </div>
+        <a href="/tdee" class="btn back-btn">Quay lại</a>
+      </div>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Trịnh Quý Thiện, Trần Viết Thịnh, Đinh Đức Dũng | Giúp bạn đạt được mục tiêu sức khỏe của mình.</p>
-        </div>
+      <div class="container">
+        <p>&copy; 2024 Trịnh Quý Thiện, Trần Viết Thịnh, Đinh Đức Dũng | Giúp bạn đạt được mục tiêu sức khỏe của mình.</p>
+      </div>
     </footer>
-</body>
+  </body>
 </html>

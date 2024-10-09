@@ -1,68 +1,102 @@
+/* General Styles */
 html, body {
-    height: 100%; /* Set height to 100% for html and body */
-    margin: 0; /* Remove default margin */
-    display: flex; /* Use flexbox for body */
-    flex-direction: column; /* Stack children vertically */
-    font-family: Arial, sans-serif; /* Font for the body */
-    background-color: #f5f5f5; /* Light background color */
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
 }
 
 .container {
-    max-width: 1200px; /* Container max width */
-    margin: 0 auto; /* Center the container */
-    padding: 20px; /* Container padding */
-    flex: 1; /* Allow container to grow */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
 }
 
+/* Header Styles */
 header {
-    background-color: #f8f9fa; /* Background color for header */
-    padding: 10px 0; /* Reduce padding for header */
+    background-color: #007bff;
+    padding: 10px 0;
 }
 
 .nav-links {
-    list-style-type: none; /* Remove bullet points from list */
-    display: flex; /* Use flexbox for horizontal alignment */
-    justify-content: center; /* Center the nav items */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
 .nav-links li {
-    margin: 0 15px; /* Space between nav items */
+    margin: 0 15px;
 }
 
 .nav-links a {
-    text-decoration: none; /* Remove underline from links */
-    color: #007bff; /* Color for links */
-    font-size: 18px; /* Font size for links */
-    font-weight: bold; /* Make links bold */
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
+.nav-links a:hover {
+    color: #ffd700; /* Gold color on hover */
+}
+
+/* Main Content Styles */
 h1 {
-    text-align: center; /* Center the title */
-    margin-bottom: 20px; /* Space below title */
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .btn {
-    display: inline-block; /* Make the button inline block */
-    padding: 10px 20px; /* Padding for the button */
-    background-color: #28a745; /* Green background */
-    color: white; /* White text color */
-    text-align: center; /* Center the text */
-    text-decoration: none; /* Remove underline */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    width: auto; /* Auto width */
-    margin-top: 20px; /* Space above button */
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    margin-top: 20px;
+    transition: background-color 0.3s;
 }
 
 .btn:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838;
 }
 
+/* Recommendations Styles */
+.recommendations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recommendation-item {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%; /* Responsive */
+}
+
+.category-image {
+    max-width: 100px; /* Size for images */
+    margin-bottom: 10px;
+}
+
+/* Footer Styles */
 footer {
-    padding: 10px; /* Padding for footer */
-    text-align: center; /* Center the footer text */
-    background-color: #f8f9fa; /* Background color for footer */
-    margin-top: 20px; /* Space above footer */
+    padding: 10px;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    margin-top: 20px;
 }

@@ -1,6 +1,14 @@
 from django.shortcuts import render
+import random
 from .forms import TDEEForm
 from .models import Meal
+
+def calculate_bmr(weight, height, age, gender):
+    """Calculate BMR using the Mifflin-St Jeor Equation."""
+    if gender == 'Male':
+        return 10 * weight + 6.25 * height - 5 * age + 5
+    else:
+        return 10 * weight + 6.25 * height - 5 * age - 161
 
 def calculate_tdee(request):
     if request.method == 'POST':
@@ -11,64 +19,96 @@ def calculate_tdee(request):
             height = form.cleaned_data['height']
             age = form.cleaned_data['age']
             gender = form.cleaned_data['gender']
-            activity_level = form.cleaned_data['activity_level']
+            activity_level = float(form.cleaned_data['activity_level'])
             goal = form.cleaned_data['goal']
 
             # Calculate BMR and TDEE
             bmr = calculate_bmr(weight, height, age, gender)
             tdee = bmr * activity_level
+
+            # Adjust TDEE based on goal
             if goal == 'lose':
                 tdee -= 500
             elif goal == 'gain':
                 tdee += 500
 
-            print(f"TDEE: {tdee}")
+            # Define recommended daily intake for food types (grams)
+            recommended_intake = { 'vegetable': 300, 'snack': 50, 'main': 500, 'red_meat': 200, 'white_meat': 200, 'fish': 200,'grain': 250,'dairy': 200,'fruit': 200,'dessert': 100,'beverage': 200}
 
-            # Fetch meals
+            # Define nutritional values per 100g for each meal type
+            nutritional_values = {
+                'vegetable': {'protein': 2, 'carbs': 5, 'fats': 0.5},
+                'snack': {'protein': 5, 'carbs': 20, 'fats': 10},
+                'main': {'protein': 20, 'carbs': 30, 'fats': 10},  # example for main meals
+                'red_meat': {'protein': 25, 'carbs': 0, 'fats': 15},
+                'white_meat': {'protein': 25, 'carbs': 0, 'fats': 10},
+                'fish': {'protein': 22, 'carbs': 0, 'fats': 5},
+                'grain': {'protein': 10, 'carbs': 75, 'fats': 1},
+                'dairy': {'protein': 8, 'carbs': 5, 'fats': 10},
+                'fruit': {'protein': 1, 'carbs': 15, 'fats': 0.3},
+                'dessert': {'protein': 2, 'carbs': 40, 'fats': 5},
+                'beverage': {'protein': 0, 'carbs': 5, 'fats': 0}   # typically low in protein
+            }
+
+            # Calculate daily nutritional goals based on recommendations
+            daily_protein = sum((recommended_intake[item] / 100) * nutritional_values[item]['protein'] for item in recommended_intake)
+            daily_carbs = sum((recommended_intake[item] / 100) * nutritional_values[item]['carbs'] for item in recommended_intake)
+            daily_fats = sum((recommended_intake[item] / 100) * nutritional_values[item]['fats'] for item in recommended_intake)
+
+            # Fetch meals and filter
             meals = Meal.objects.filter(calories__lte=tdee)
-            print("Fetched meals:")
-            for meal in meals:
-                print(meal.name, meal.calories)
+            balanced_meals = filter_balanced_meals(meals, daily_protein, daily_carbs, daily_fats)
 
-            # Filter balanced meals
-            balanced_meals = filter_balanced_meals(meals)
+            # Check if balanced_meals is empty
+            if not balanced_meals:
+                balanced_meals = meals  # Fallback to all meals if no balanced meals are found
 
             return render(request, 'results.html', {'tdee': tdee, 'meals': balanced_meals})
-
     else:
         form = TDEEForm()
+
     return render(request, 'tdee.html', {'form': form})
 
-def calculate_bmr(weight, height, age, gender):
-    """Calculate BMR using the Mifflin-St Jeor Equation."""
-    if gender == 'Male':
-        return 10 * weight + 6.25 * height - 5 * age + 5
-    else:
-        return 10 * weight + 6.25 * height - 5 * age - 161
-
-def filter_balanced_meals(meals):
-    """Filter meals to ensure they meet nutritional balance criteria."""
+def filter_balanced_meals(meals, daily_protein, daily_carbs, daily_fats):
+    """Filter meals to ensure they meet daily nutritional balance criteria."""
     balanced_meals = []
-    for meal in meals:
-        total_calories = meal.calories
-        protein_calories = meal.protein * 4  # 4 calories per gram of protein
-        carb_calories = meal.carbs * 4  # 4 calories per gram of carbs
-        fat_calories = meal.fats * 9  # 9 calories per gram of fat
+    
+    # Initialize total intake trackers
+    total_protein = 0
+    total_carbs = 0
+    total_fats = 0
+    total_calories = 0
 
-        if total_calories > 0:  # Avoid division by zero
-            protein_ratio = protein_calories / total_calories
-            carb_ratio = carb_calories / total_calories
-            fat_ratio = fat_calories / total_calories
+    shuffled_meals = list(meals)  # Convert QuerySet to a list
+    random.shuffle(shuffled_meals)  # Shuffle the list
 
-            print(f"{meal.name} - Total Calories: {total_calories}, Protein Ratio: {protein_ratio}, Carb Ratio: {carb_ratio}, Fat Ratio: {fat_ratio}")
+    for meal in shuffled_meals:
+        # Extract nutritional values
+        protein = meal.protein
+        carbs = meal.carbs
+        fats = meal.fats
+        calories = meal.calories
 
-            # Adjust criteria to accommodate low-protein foods
-            if (
-                carb_ratio >= 0.5 and
-                (protein_ratio >= 0.1 or meal.meal_type in ['vegetable', 'fruit']) and  # Allow lower protein for veggies/fruits
-                fat_ratio <= 0.3
-            ):
-                balanced_meals.append(meal)
+        # Check if adding this meal would exceed the daily nutritional goals
+        if (total_protein + protein <= daily_protein and
+            total_carbs + carbs <= daily_carbs and
+            total_fats + fats <= daily_fats):
+            # Add meal to balanced meals
+            balanced_meals.append(meal)
+
+            # Update total intake
+            total_protein += protein
+            total_carbs += carbs
+            total_fats += fats
+            total_calories += calories
+
+            # Print meal details for debugging
+            print(f"Added: {meal.name} - Total Calories: {calories}, Protein: {protein}g, Carbs: {carbs}g, Fats: {fats}g")
+
+        # Break if we've met or exceeded all daily goals
+        if (total_protein >= daily_protein and
+            total_carbs >= daily_carbs and
+            total_fats <= daily_fats):
+            break
 
     return balanced_meals
-

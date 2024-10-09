@@ -1,72 +1,101 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="vi">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tính BMI</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/bmi.css' %}" />
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="/">Trang Chủ</a></li>
-                    <li><a href="/bmi">Tính BMI</a></li>
-                    <li><a href="/tdee">Tính TDEE</a></li>
-                </ul>
-            </nav>
-        </div>
+      <div class="container">
+        <nav>
+          <ul class="nav-links">
+            <li>
+              <a href="/">Trang Chủ</a>
+            </li>
+            <li>
+              <a href="/bmi">Tính BMI</a>
+            </li>
+            <li>
+              <a href="/tdee">Tính TDEE</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main>
-        <div class="container">
-            <h1>Tính BMI</h1>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn calculate-btn">Tính</button>
-            </form>
-            {% if bmi %}
-                <h2>Kết quả BMI: <span>{{ bmi|floatformat:2 }}</span></h2>
-                <h3>Phân loại: {{ category }}</h3>
+      <div class="container">
+        <h1>Tính BMI</h1>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn calculate-btn">Tính</button>
+        </form>
+        {% if bmi %}
+          <h2>Kết quả BMI: <span>{{ bmi|floatformat:2 }}</span></h2>
+          <h3>Phân loại: {{ category }}</h3>
 
-                <div class="recommendations">
-                    {% if category == "Severe Thinness" %}
-                        <img src="{% static 'img/severe-thinness.png' %}" alt="Severe Thinness" class="category-image" />
-                        <p>Bạn cần tham khảo ý kiến bác sĩ để cải thiện tình trạng sức khỏe.</p>
-                    {% elif category == "Moderate Thinness" %}
-                        <img src="{% static 'img/moderate-thinness.png' %}" alt="Moderate Thinness" class="category-image" />
-                        <p>Hãy tăng cường dinh dưỡng và xem xét chế độ ăn uống.</p>
-                    {% elif category == "Mild Thinness" %}
-                        <img src="{% static 'img/mild-thinness.png' %}" alt="Mild Thinness" class="category-image" />
-                        <p>Cố gắng duy trì cân nặng và thực hiện chế độ ăn uống lành mạnh.</p>
-                    {% elif category == "Normal Weight" %}
-                        <img src="{% static 'img/normal.png' %}" alt="Normal Weight" class="category-image" />
-                        <p>Bạn đang ở trọng lượng lý tưởng. Tiếp tục duy trì chế độ ăn uống lành mạnh!</p>
-                    {% elif category == "Overweight" %}
-                        <img src="{% static 'img/overweight.png' %}" alt="Overweight" class="category-image" />
-                        <p>Bạn nên xem xét giảm cân và thực hiện chế độ ăn uống hợp lý.</p>
-                    {% elif category == "Obesity Class I" %}
-                        <img src="{% static 'img/obesity-class-1.png' %}" alt="Obesity Class I" class="category-image" />
-                        <p>Hãy tìm kiếm sự hỗ trợ từ bác sĩ hoặc chuyên gia dinh dưỡng.</p>
-                    {% elif category == "Obesity Class II" %}
-                        <img src="{% static 'img/obesity-class-2.png' %}" alt="Obesity Class II" class="category-image" />
-                        <p>Cần có một kế hoạch giảm cân rõ ràng. Tham khảo ý kiến chuyên gia.</p>
-                    {% elif category == "Obesity Class III" %}
-                        <img src="{% static 'img/obesity-class-3.png' %}" alt="Obesity Class III" class="category-image" />
-                        <p>Rất quan trọng để tìm kiếm sự hỗ trợ y tế và chuyên gia dinh dưỡng.</p>
-                    {% endif %}
-                </div>
+          <div class="recommendations">
+            {% if category == 'Severe Thinness' %}
+              <div class="recommendation-item">
+                <img src="{% static 'img/severe-thinness.png' %}" alt="Severe Thinness" class="category-image" />
+                <p>Bạn cần tham khảo ý kiến bác sĩ để có hướng dẫn cụ thể về chế độ dinh dưỡng và lối sống, nhằm cải thiện tình trạng sức khỏe một cách an toàn và hiệu quả. Đảm bảo cung cấp đủ chất dinh dưỡng như protein, vitamin và khoáng chất qua các bữa ăn hàng ngày để giúp cơ thể hồi phục.</p>
+              </div>
+              
+            {% elif category == 'Moderate Thinness' %}
+              <div class="recommendation-item">
+                <img src="{% static 'img/moderate-thinness.png' %}" alt="Moderate Thinness" class="category-image" />
+                <p>Hãy tăng cường dinh dưỡng bằng cách bổ sung các thực phẩm giàu protein và vitamin trong chế độ ăn uống hàng ngày. Bạn cũng nên tham khảo ý kiến của chuyên gia dinh dưỡng để có một kế hoạch ăn uống hợp lý giúp tăng cân một cách an toàn và hiệu quả.</p>
+              </div>
+
+            {% elif category == 'Mild Thinness' %}
+              <div class="recommendation-item">
+                <img src="{% static 'img/mild-thinness.png' %}" alt="Mild Thinness" class="category-image" />
+                <p>Cố gắng duy trì cân nặng bằng chế độ ăn uống lành mạnh và duy trì tập luyện nhẹ nhàng hàng ngày. Hãy đảm bảo rằng bạn ăn đủ bữa và không bỏ bữa, đồng thời tăng cường thực phẩm giàu calo và dinh dưỡng để hỗ trợ sức khỏe tổng thể.</p>
+              </div>
+
+            {% elif category == 'Normal Weight' %}
+              <div class="recommendation-item">
+                <img src="{% static 'img/normal.png' %}" alt="Normal Weight" class="category-image" />
+                <p>Bạn đang ở trọng lượng lý tưởng. Tiếp tục duy trì chế độ ăn uống cân bằng và tập thể dục thường xuyên! Bạn có thể thử các hoạt động thể chất như yoga, chạy bộ hoặc bơi lội để giữ cho cơ thể luôn khỏe mạnh và linh hoạt.</p>
+              </div>
+
+            {% elif category == 'Overweight' %}
+              <div class="recommendation-item">
+                <img src="{% static 'img/overweight.png' %}" alt="Overweight" class="category-image" />
+                <p>Bạn nên điều chỉnh chế độ ăn uống, giảm lượng calo nạp vào và tăng cường vận động để kiểm soát cân nặng. Hãy cố gắng kết hợp các bài tập sức mạnh với cardio để đốt cháy mỡ thừa và duy trì sức khỏe.</p>
+              </div>
+
+            {% elif category == 'Obesity Class I' %}
+              <div class="recommendation-item">
+                <img src="{% static 'img/obese-class-1.png' %}" alt="Obesity Class I" class="category-image" />
+                <p>Hãy tìm kiếm sự hỗ trợ từ chuyên gia dinh dưỡng để xây dựng kế hoạch ăn uống và tập luyện hợp lý. Việc tham gia vào các chương trình giảm cân có sự giám sát của chuyên gia có thể giúp bạn đạt được mục tiêu sức khỏe một cách an toàn hơn.</p>
+              </div>
+
+            {% elif category == 'Obesity Class II' %}
+              <div class="recommendation-item">
+                <img src="{% static 'img/obese-class-2.png' %}" alt="Obesity Class II" class="category-image" />
+                <p>Bạn cần có một kế hoạch giảm cân cụ thể. Tham khảo ý kiến chuyên gia để được hướng dẫn chi tiết về chế độ dinh dưỡng và lịch tập luyện, giúp bạn kiểm soát cân nặng một cách hiệu quả hơn.</p>
+              </div>
+
+            {% elif category == 'Obesity Class III' %}
+              <div class="recommendation-item">
+                <img src="{% static 'img/obese-class-3.png' %}" alt="Obesity Class III" class="category-image" />
+                <p>Tình trạng của bạn rất quan trọng để tìm kiếm sự hỗ trợ y tế và theo dõi sức khỏe định kỳ. Hãy làm việc với bác sĩ để thiết lập một kế hoạch giảm cân toàn diện và an toàn.</p>
+              </div>
             {% endif %}
-        </div>
+          </div>
+        {% endif %}
+      </div>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Trịnh Quý Thiện, Trần Viết Thịnh, Đinh Đức Dũng | Giúp bạn đạt được mục tiêu sức khỏe của mình.</p>
-        </div>
+      <div class="container">
+        <p>&copy; 2024 Trịnh Quý Thiện, Trần Viết Thịnh, Đinh Đức Dũng | Giúp bạn đạt được mục tiêu sức khỏe của mình.</p>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
