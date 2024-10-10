@@ -28,7 +28,7 @@ def calculate_tdee(request):
 
             # Adjust TDEE based on goal
             if goal == 'lose':
-                tdee -= 500
+                tdee -= 500         
             elif goal == 'gain':
                 tdee += 500
 
